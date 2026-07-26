@@ -1,0 +1,22 @@
+{
+  "name": "Dream Design Dwell",
+  "short_name": "D3",
+  "description": "Dream Design Dwell — designing spaces, defining lifestyles. Interior design studio in Mumbai.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8F1",
+  "theme_color": "#FDF8F1",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml"
+    }
+  ]
+}

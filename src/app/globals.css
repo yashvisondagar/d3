@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fdf8f1;
+  --color-sand: #f3ebe0;
+  --color-mist: #ebe2d4;
+  --color-gold: #b48c48;
+  --color-gold-soft: #c9a86a;
+  --color-ink: #2a261f;
+  --color-charcoal: #1d1d1b;
+  --font-serif: var(--font-playfair), "Times New Roman", serif;
+  --font-sans: var(--font-lato), "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--color-gold) 35%, white);
+}
+
+/* Soft paper grain — atmosphere without flat fills */
+.grain::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+.ambient-wash {
+  background:
+    radial-gradient(ellipse 70% 50% at 12% 18%, rgba(180, 140, 72, 0.14), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 88% 12%, rgba(243, 235, 224, 0.9), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 70% 88%, rgba(180, 140, 72, 0.08), transparent 55%),
+    linear-gradient(165deg, #fdf8f1 0%, #f7f0e6 48%, #f3ebe0 100%);
+}
+
+.hero-arch {
+  border-radius: 50% 50% 46% 46% / 58% 58% 40% 40%;
+  box-shadow:
+    0 30px 60px -28px rgba(29, 29, 27, 0.35),
+    inset 0 0 0 1px rgba(180, 140, 72, 0.18);
+}
+
+.photo-arch {
+  border-radius: 999px 999px 28px 28px / 42% 42% 12% 12%;
+}
+
+.gold-rule {
+  height: 1px;
+  width: 3.5rem;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+}
+
+.ornament-ring {
+  border: 1px solid color-mix(in oklab, var(--color-gold) 45%, transparent);
+}
+
+.map-panel {
+  background:
+    radial-gradient(ellipse 40% 70% at 8% 50%, rgba(110, 140, 155, 0.14), transparent 55%),
+    radial-gradient(ellipse 35% 50% at 92% 60%, rgba(110, 140, 155, 0.1), transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.55), transparent 40%),
+    radial-gradient(circle at 55% 70%, rgba(180, 140, 72, 0.1), transparent 45%),
+    linear-gradient(165deg, #faf4eb 0%, #f0e6d6 48%, #e8dcc8 100%);
+  box-shadow:
+    0 28px 60px -32px rgba(29, 29, 27, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 0 0 1px rgba(180, 140, 72, 0.12);
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-float {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+.animate-ken {
+  animation: ken-burns 18s ease-out forwards;
+}
+
+.animate-rule {
+  transform-origin: left;
+  animation: draw-line 1s ease-out 0.3s both;
+}
+
+@media (max-width: 767px) {
+  .hero-arch {
+    border-radius: 1.5rem 1.5rem 2.5rem 2.5rem;
+  }
+
+  .photo-arch {
+    border-radius: 1.25rem;
+  }
+}
+
+@keyframes ink-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.sketch-hint {
+  animation: ink-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-ken,
+  .animate-rule,
+  .sketch-hint {
+    animation: none;
+  }
+}
+
+/* Leaflet — brand pins + clean chrome */
+.leaflet-container {
+  font-family: var(--font-sans), Lato, sans-serif;
+  z-index: 0;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px !important;
+  background: rgba(253, 248, 241, 0.88) !important;
+  color: rgba(29, 29, 27, 0.55) !important;
+}
+
+.d3-map-pin {
+  background: transparent !important;
+  border: none !important;
+}
+
+.d3-pin-dot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: #b48c48;
+  box-shadow:
+    0 0 0 3px #fdf8f1,
+    0 8px 18px rgba(29, 29, 27, 0.28);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.d3-pin-dot.is-active {
+  background: #1d1d1b;
+  box-shadow:
+    0 0 0 3px #b48c48,
+    0 10px 22px rgba(29, 29, 27, 0.35);
+  transform: scale(1.08);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+  border: 1px solid rgba(180, 140, 72, 0.35);
+  box-shadow: 0 16px 36px -18px rgba(29, 29, 27, 0.4);
+  font-family: var(--font-sans), Lato, sans-serif;
+}
+
+.leaflet-popup-content {
+  margin: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1d1d1b;
+}
+
+.leaflet-popup-tip {
+  background: #fdf8f1;
+}
+
